@@ -12,6 +12,8 @@ public class Emulator {
     public static void start(){
         while(!HLT && PC < MAX_MEM_SIZE)
             Emulator.run();
+
+        System.out.println("Emulator: Emulation Complete!");
     }
     private static void loadROM(byte[] MEM){
         if (MEM.length <= MAX_MEM_SIZE) {
@@ -299,8 +301,9 @@ public class Emulator {
     public static void main(String[] args) {
         byte[] memory = Emulator.packageROM(args[0]);
         Emulator.loadROM(memory);
+        Emulator.start();
 
-        System.out.println();
+        //Attempt to do 4 - 5 and print it out
     }
 
 }
