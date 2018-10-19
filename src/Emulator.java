@@ -293,7 +293,7 @@ public class Emulator {
         else F = (byte)(F & (0x1 ^ 0xFF));
 
         //Negative Flag
-        if (A >> 7 == 1)
+        if (((A >> 7) & 0x01) == 1)
             F = (byte)(F | 0x2);
         else F = (byte)(F & (0x2 ^ 0xFF));
     }
