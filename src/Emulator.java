@@ -1,6 +1,5 @@
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Emulator {
@@ -158,7 +157,112 @@ public class Emulator {
         }
         // LDA
         else if (data == (byte)0x3A){
-            
+            A = MEM[MEM[PC] | (MEM[PC + 1] << 8)];
+            PC += 2;
+        }
+        // MOV A,B
+        else if (data == (byte)0x78){
+            A = B;
+        }
+        // MOV A,C
+        else if (data == (byte)0x79){
+            A = C;
+        }
+        // MOV B,A
+        else if (data == (byte)0x47){
+            B = A;
+        }
+        // MOV B,C
+        else if (data == (byte)0x41){
+            B = C;
+        }
+        // MOV C,A
+        else if (data == (byte)0x4F){
+            C = A;
+        }
+        // MOV C, B
+        else if (data == (byte)0x48){
+            C = B;
+        }
+        // MVI A, $
+        else if (data == (byte)0x3E){
+            A = MEM[PC++];
+        }
+        // MVI B, $
+        else if (data == (byte)0x06){
+            B = MEM[PC++];
+        }
+        // MVI C, $
+        else if (data == (byte)0x0E){
+            C = MEM[PC++];
+        }
+        // NOP
+        else if (data == (byte)0x00){
+
+        }
+        // ORA B
+        else if (data == (byte)0xB0){
+            A = (byte)(A | B);
+            updateFlags();
+        }
+        // ORA C
+        else if (data == (byte)0xB1){
+            A = (byte)(A | C);
+            updateFlags();
+        }
+        // ORI $
+        else if (data == (byte)0xF6){
+            A = (byte)(A | MEM[PC++]);
+        }
+        // OUT
+        else if (data == (byte)0xD3){
+            System.out.println("Emulator: 0x" + Integer.toHexString(Byte.toUnsignedInt(A)).toUpperCase());
+        }
+        // RAL
+        else if (data == (byte)0x17){
+             int t = (A >> 7) & 0x01;
+             A = (byte)(((A << 1) & 0xFF) | t);
+        }
+        // RAR
+        else if (data == (byte)0x1F){
+            int t = A & 0x01;
+            A = (byte)((A >> 1) | (t << 7));
+        }
+        // RET
+        else if (data == (byte)0xC9){
+            PC = R;
+        }
+        // STA $$
+        else if (data == (byte)0x32){
+            MEM[MEM[PC] | (MEM[PC + 1] << 8)] = A;
+            PC += 2;
+        }
+        // SUB B
+        else if (data == (byte)0x90){
+            byte BTC = add((byte)(B ^ 0xFF), (byte)1);
+            A = add(A, BTC);
+            updateFlags();
+        }
+        // SUB C
+        else if (data == (byte)0x91){
+            byte CTC = add((byte)(C ^ 0xFF), (byte)1);
+            A = add(A, CTC);
+            updateFlags();
+        }
+        // XRA B
+        else if (data == (byte)0xA8){
+            A = (byte)(A ^ B);
+            updateFlags();
+        }
+        // XRA C
+        else if (data == (byte)0xA9){
+            A = (byte)(A ^ C);
+            updateFlags();
+        }
+        // XRI
+        else if (data == (byte)0xEE){
+            A = (byte)(A ^ MEM[PC++]);
+            updateFlags();
         }
     }
     private static byte add(byte a, byte b){
@@ -196,7 +300,7 @@ public class Emulator {
         byte[] memory = Emulator.packageROM(args[0]);
         Emulator.loadROM(memory);
 
-        System.out.println(Integer.parseInt("FF", 16));
+        System.out.println();
     }
 
 }
