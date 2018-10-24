@@ -79,3 +79,25 @@ __***Specs***__:
 5. __Run__ the following to run your program:
 <br/></br>
   ```java Emulator <OUTPUT_FILE>.bin```
+
+***Example Program***
+---
+In the <INPUT_FILE>.txt, the folling program subtracts 7 from 3, and outputs the signed version in hexadecimal
+  ```
+  ;Program
+  LDA 0x000A
+  MOV B,A
+  LDA 0x000B
+  SUB B
+  OUT
+  HLT
+  ;Data
+  0x07
+  0x04
+  ```
+  
+  When run, the following program while output the following,
+  ```
+Emulator: 0xFD
+Emulator: Emulation Complete!
+  ```
