@@ -133,4 +133,8 @@ class Assembler {
             ioe.printStackTrace();
         }
     }
+
+    public static void main(String[] args){
+        Assembler.assemble(args[0], args[1]);
+    }
 }

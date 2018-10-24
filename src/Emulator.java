@@ -302,8 +302,6 @@ public class Emulator {
         byte[] memory = Emulator.packageROM(args[0]);
         Emulator.loadROM(memory);
         Emulator.start();
-
-        Assembler.assemble("res/Program1.txt", "res/o.bin");
     }
 
 }
