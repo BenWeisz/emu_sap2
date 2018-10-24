@@ -9,7 +9,7 @@
 ***About SAP2***
 ---
 The __SAP2__ is the second CPU outlined in __Albert Paul Malvino__ and __Jerald A. Brown's__ book __***Digital Computer Electronic***__.
-Simple in its design, the __SAP2__ has 43 operation types. 
+The __SAP2__ has 43 operation types in total. 
 
 | Operation Type     | SAP Assembly  | OP Code    |
 |:------------------:|:-------------:|:----------:|
