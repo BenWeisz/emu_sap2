@@ -9,7 +9,7 @@ public class Emulator {
     private static byte A = 0x00, B = 0x00, C = 0x00, F = 0x00;
     private static boolean HLT = false;
 
-    public static void start(){
+    private static void start(){
         while(!HLT && PC < MAX_MEM_SIZE)
             Emulator.run();
 
@@ -303,7 +303,7 @@ public class Emulator {
         Emulator.loadROM(memory);
         Emulator.start();
 
-        //Attempt to do 4 - 5 and print it out
+        Assembler.assemble("res/Program1.txt", "res/o.bin");
     }
 
 }
